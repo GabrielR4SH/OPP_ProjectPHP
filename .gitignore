@@ -1,0 +1,26 @@
+# Dependências do Composer
+/vendor/
+
+# Configurações de ambiente
+.env
+.env.*
+
+# Arquivos temporários e de cache
+*.log
+*.cache
+*.tmp
+
+# Diretórios e arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de IDEs
+.idea/
+.vscode/
+*.sublime*
+
+# Arquivos de depuração
+debug/tempCodeRunnerFile.php
+
+# Arquivos do Composer gerados automaticamente
+composer.lock
