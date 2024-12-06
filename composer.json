@@ -1,0 +1,15 @@
+{
+    "name": "desktop/opp",
+    "autoload": {
+        "psr-4": {
+            "Desktop\\Opp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "GabrielR4SH",
+            "email": "bieelsantana23@hotmail.com"
+        }
+    ],
+    "require": {}
+}
