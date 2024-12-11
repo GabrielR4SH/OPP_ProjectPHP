@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Desktop\Opp;
+namespace App;
 
-class ContaBancaria
+abstract class ContaBancaria
 {
     private string $banco;
     private string $nomeTitular;
     private string $numeroAgencia;
     private string $numeroConta;
-    private float $saldo;
+    protected float $saldo;
+
 
     // Construtor
     public function __construct(
@@ -42,10 +43,12 @@ class ContaBancaria
         return 'Saque de R$:' . number_format($valor, 2, '.','') . ' realizado com sucesso';
     }
 
-    public function obterSaldo(): string
-    {
-        return 'Seu saldo é: R$:' . number_format($this->saldo,2,'.','');
-    }
+    public abstract function obterSaldo(): string;
+    // public function obterSaldo(): string
+    // {
+    //     return 'Seu saldo é: R$:' . number_format($this->saldo,2,'.','');
+    // }
+
 
     // Método para exibir titular e número da conta
     public function exibir_titular_numeroConta(): array

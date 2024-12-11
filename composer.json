@@ -2,7 +2,7 @@
     "name": "desktop/opp",
     "autoload": {
         "psr-4": {
-            "Desktop\\Opp\\": "src/"
+             "App\\": "src/"
         }
     },
     "authors": [
