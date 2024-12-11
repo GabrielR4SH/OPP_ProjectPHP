@@ -19,7 +19,7 @@ class ContaCorrente extends ContaBancaria
 
     public function obterSaldo(): string
     {
-        return 'Seu saldo é: R$:' . number_format(($this->saldo - self::TAXA), 2, '.', '');
+        return 'Seu saldo é R$:' . number_format(($this->saldo - self::TAXA), 2, '.', '');
     }
 
 

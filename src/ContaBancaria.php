@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace App;
 
-abstract class ContaBancaria
+use App\Contratos\DadosContaBancariaInterface;
+use App\Contratos\OperacoesContaBancariaInterface;
+
+abstract class ContaBancaria implements DadosContaBancariaInterface, OperacoesContaBancariaInterface
 {
     private string $banco;
     private string $nomeTitular;
     private string $numeroAgencia;
     private string $numeroConta;
     protected float $saldo;
-
 
     // Construtor
     public function __construct(
@@ -28,38 +30,26 @@ abstract class ContaBancaria
         $this->saldo = $saldo;
     }
 
-
-    //Metodo Deposito
+    // Implementação de métodos do OperacoesContaBancariaInterface
     public function depositar(float $valor): string
     {
         $this->saldo += $valor;
         return 'Depósito de R$:' . number_format($valor, 2, '.', '') . ' realizado com sucesso';
     }
 
-    //Metodo Saque
-    public function saque(float $valor)
+    public function sacar(float $valor): string
     {
+        if ($valor > $this->saldo) {
+            return 'Saldo insuficiente para saque.';
+        }
         $this->saldo -= $valor;
-        return 'Saque de R$:' . number_format($valor, 2, '.','') . ' realizado com sucesso';
+        return 'Saque de R$:' . number_format($valor, 2, '.', '') . ' realizado com sucesso';
     }
 
+    // Método abstrato a ser implementado pelas classes filhas
     public abstract function obterSaldo(): string;
-    // public function obterSaldo(): string
-    // {
-    //     return 'Seu saldo é: R$:' . number_format($this->saldo,2,'.','');
-    // }
 
-
-    // Método para exibir titular e número da conta
-    public function exibir_titular_numeroConta(): array
-    {
-        return [
-            'nomeTitular' => $this->nomeTitular,
-            'numeroConta' => $this->numeroConta,
-        ];
-    }
-
-    // Getters
+    // Implementação de métodos do DadosContaBancariaInterface
     public function getBanco(): string
     {
         return $this->banco;
@@ -70,7 +60,7 @@ abstract class ContaBancaria
         return $this->nomeTitular;
     }
 
-    public function getNumeroAgencia(): string
+    public function getNomeAgencia(): string
     {
         return $this->numeroAgencia;
     }
@@ -80,6 +70,16 @@ abstract class ContaBancaria
         return $this->numeroConta;
     }
 
+    // Método auxiliar para exibir titular e número da conta
+    public function exibirTitularNumeroConta(): array
+    {
+        return [
+            'nomeTitular' => $this->nomeTitular,
+            'numeroConta' => $this->numeroConta,
+        ];
+    }
+
+    // Getter adicional para o saldo
     public function getSaldo(): float
     {
         return $this->saldo;
